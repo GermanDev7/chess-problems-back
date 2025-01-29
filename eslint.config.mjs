@@ -1,15 +1,18 @@
-// @ts-check
+import { configs as tseslintConfigs } from '@typescript-eslint/eslint-plugin';
 import eslint from '@eslint/js';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import globals from 'globals';
-import tseslint from 'typescript-eslint';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
-export default tseslint.config(
+export default tseslintConfigs(
   {
-    ignores: ['eslint.config.mjs'],
+    ignores: [
+      'eslint.config.mjs',
+      'dist/',
+      'node_modules/',
+    ],
   },
   eslint.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
+  tseslintConfigs.recommendedTypeChecked,
   eslintPluginPrettierRecommended,
   {
     languageOptions: {
@@ -17,11 +20,12 @@ export default tseslint.config(
         ...globals.node,
         ...globals.jest,
       },
-      ecmaVersion: 5,
-      sourceType: 'module',
+      parser: '@typescript-eslint/parser',
       parserOptions: {
-        projectService: true,
+        ecmaVersion: 2021,
+        sourceType: 'module',
         tsconfigRootDir: import.meta.dirname,
+        project: ['./tsconfig.json'],
       },
     },
   },
@@ -29,7 +33,8 @@ export default tseslint.config(
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-floating-promises': 'warn',
-      '@typescript-eslint/no-unsafe-argument': 'warn'
+      '@typescript-eslint/no-unsafe-argument': 'warn',
+      'prettier/prettier': 'error',
     },
   },
 );
