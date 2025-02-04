@@ -9,8 +9,8 @@ export class CreateProblemDto{
     @IsNotEmpty()
     fen:string;
 
-    @IsArray()
-    @IsString({each:true})
+    
+    @IsString()
     solution:string
 
     @IsNumber()

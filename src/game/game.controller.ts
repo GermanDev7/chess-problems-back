@@ -10,18 +10,20 @@ export class GameController {
         @Post('start')
         startGame(
             @Body('collectionId') collectionId:string,
-            @Body('timeLimit') timeLimit:number
+            @Body('timeLimit') timeLimit:number,
+            @Body('userId') userId:string
 
         ){
-            return this.gameService.startGame(collectionId,timeLimit)
+            return this.gameService.startGame(collectionId,timeLimit,userId)
         }
 
         @Post('submit')
         submitAswer(
             @Body('problemId') problemId:string,
-            @Body('userAnswer') userAnswer:string
+            @Body('userAnswer') userAnswer:string,
+            @Body('sessionId') sessionId:string
         ){
-            return this.gameService.submitAnswer(problemId,userAnswer);
+            return this.gameService.submitAnswer(problemId,userAnswer,sessionId);
         }
 
         @Get('progress')

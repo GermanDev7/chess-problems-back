@@ -11,7 +11,7 @@ export class Problem {
     @Prop({ required: true })
     fen: string;
 
-    @Prop({ required: true, type: [String] })
+    @Prop({ required: true, type: String })
     solution: string
 
     @Prop({ required: true, default: 1200 })
